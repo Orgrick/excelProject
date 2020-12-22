@@ -39,12 +39,9 @@ module.exports = {
   },
   devServer: {
     contentBase: ['./src', './dist'],
-    compress: true,
     port: 4200,
     open: true,
-    inline: true,
     hot: true,
-
   },
   devtool: isDev ? 'source-map' : false,
   plugins: [
@@ -58,6 +55,7 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
+        // eslint-disable-next-line max-len
         {from: path.resolve(__dirname, 'src/favicon.ico'), to: path.resolve(__dirname, 'dist')},
       ],
     }),
