@@ -8,7 +8,7 @@ const isProd = !isDev
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
 const jsLoaders = () => {
-  const loadres = [{
+  const loaders = [{
     loader: 'babel-loader',
     options: {
       presets: ['@babel/preset-env'],
@@ -16,10 +16,10 @@ const jsLoaders = () => {
     },
   }]
   if (isDev) {
-    loadres.push('eslint-loader')
+    loaders.push('eslint-loader')
   }
 
-  return loadres
+  return loaders
 }
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
   },
   devServer: {
     contentBase: ['./src', './dist'],
-    port: 4200,
+    port: 3000,
     open: true,
     hot: true,
   },
@@ -56,8 +56,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        // eslint-disable-next-line max-len
-        {from: path.resolve(__dirname, 'src/favicon.ico'), to: path.resolve(__dirname, 'dist')},
+        {from: path.resolve(__dirname, 'src/favicon.ico'),
+          to: path.resolve(__dirname, 'dist')},
       ],
     }),
     new MiniCssExtractPlugin({
